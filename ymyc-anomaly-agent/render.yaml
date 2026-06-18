@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: ymyc-content-anomaly-monitor
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app_ymyc_anomaly_demo.py --server.port $PORT --server.address 0.0.0.0
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: OPENAI_REPORT_MODEL
+        value: gpt-5.5
